@@ -1,10 +1,44 @@
-document.querySelector('.hamburger').addEventListener('click', function() {
+// Hamburger toggle functionality
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-link');
+
+hamburger.addEventListener('click', function() {
     this.classList.toggle('active');
-    document.querySelector('.nav-links').classList.toggle('active');
+    navLinks.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
 });
 
+navItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+       
+        if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            
+         
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('menu-open');
+    
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            navItems.forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+        }
+    });
+});
 
-// Animate skill bars when section comes into view
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.main-header') && navLinks.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const skillBars = document.querySelectorAll('.skill-progress');
     
@@ -15,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Intersection Observer for scroll animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -29,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Pause orbit on icon hover
     const orbitIcons = document.querySelectorAll('.skill-circle');
     
     orbitIcons.forEach(icon => {
@@ -44,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    // Tooltip effect
     const tooltip = document.createElement('div');
     tooltip.className = 'skill-tooltip';
     document.body.appendChild(tooltip);
@@ -63,9 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-    
-    // EDUCATION
-   /// Animate timeline items when scrolling
+ 
 document.addEventListener('DOMContentLoaded', function() {
     const timelineItems = document.querySelectorAll('.timeline-item');
     
@@ -81,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Set initial state
+
     timelineItems.forEach((item, index) => {
         item.style.opacity = '0';
         item.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
@@ -93,25 +121,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Run on load and scroll
     animateOnScroll();
     window.addEventListener('scroll', animateOnScroll);
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Get modal elements
+
         const modal = document.getElementById('achievementModal');
         const modalTitle = document.getElementById('modalTitle');
         const mediaContainer = document.getElementById('mediaContainer');
         const closeBtn = document.querySelector('.close-modal');
-        
-        // Add click event to all achievement items
+
         document.querySelectorAll('.achievement-item').forEach(item => {
             item.addEventListener('click', function() {
                 const mediaType = this.getAttribute('data-media-type');
                 const mediaSrc = this.getAttribute('data-media-src');
                 const title = this.getAttribute('data-title');
-                
-                // Set modal contents
+  
                 modalTitle.textContent = title;
                 mediaContainer.innerHTML = '';
                 
@@ -126,29 +151,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                 }
                 
-                // Show modal
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             });
         });
-        
-        // Close modal
+
         closeBtn.addEventListener('click', function() {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            
-            // Pause any playing videos
+
             const videos = mediaContainer.querySelectorAll('video');
             videos.forEach(video => video.pause());
         });
-        
-        // Close when clicking outside modal
+ 
         window.addEventListener('click', function(event) {
             if (event.target === modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
                 
-                // Pause any playing videos
                 const videos = mediaContainer.querySelectorAll('video');
                 videos.forEach(video => video.pause());
             }
@@ -158,19 +178,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Project filtering
+
     const filterBtns = document.querySelectorAll('.filter-btn');
     const workItems = document.querySelectorAll('.work-item');
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active button
+  
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
             const filter = btn.dataset.filter;
             
-            // Filter projects
             workItems.forEach(item => {
                 if (filter === 'all' || item.dataset.category === filter) {
                     item.style.display = 'block';
@@ -187,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Animation on scroll
     const animateOnScroll = () => {
         workItems.forEach(item => {
             const itemTop = item.getBoundingClientRect().top;
@@ -200,26 +218,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Set initial state
     workItems.forEach(item => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(30px)';
         item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     });
     
-    // Run on load and scroll
     animateOnScroll();
     window.addEventListener('scroll', animateOnScroll);
 });
 
-// FormSubmit with enhanced error handling
 document.querySelector('.contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const form = e.target;
     const submitBtn = form.querySelector('.submit-btn');
     const originalText = submitBtn.innerHTML;
     
-    // Show loading state
     submitBtn.innerHTML = `
         <span>Sending...</span>
         <svg class="spinner" viewBox="0 0 24 24" width="24" height="24">
@@ -240,7 +254,7 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
         });
         
         if (response.ok) {
-            // Success UI
+
             const successEl = document.createElement('div');
             successEl.className = 'form-success';
             successEl.innerHTML = `
@@ -257,7 +271,6 @@ document.querySelector('.contact-form').addEventListener('submit', async functio
             throw new Error('Failed to send');
         }
     } catch (error) {
-        // Fallback to direct mailto
         const name = encodeURIComponent(form.name.value);
         const email = encodeURIComponent(form.email.value);
         const message = encodeURIComponent(form.message.value);

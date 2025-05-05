@@ -1,5 +1,4 @@
 body
-     /* CSS Reset and Global Styles */
     {
         margin: 0;
         padding: 0;
@@ -87,8 +86,8 @@ body
     align-items: center;
     height: 100vh;
     background-image: url('images/background_img.png');
-    background-size: cover; /* Ensures the image covers the entire section */
-    background-position: center; /* Centers the image */
+    background-size: cover; 
+    background-position: center; 
     background-repeat: no-repeat;
     color: white;
     .hero-content {
@@ -190,59 +189,53 @@ body
         font-weight: 600;
     }
 
-    /* Social Icons Container */
     .social-icons {
         display: flex;
         justify-content: center;
-        gap: 10px; /* Space between icons */
+        gap: 10px;
     }
 
-    /* Social Icon Links */
     .social-icons a {
         display: inline-block;
-        width: 50px; /* Icon size */
+        width: 50px; 
         height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
-        text-decoration: none; /* Removes underline */
-        transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover effect */
+        text-decoration: none; 
+        transition: transform 0.3s ease, background-color 0.3s ease; 
     }
 
-    /* Social Icon Images */
     .social-icons img {
-        width: 50px; /* Smaller image size */
+        width: 50px; 
         height: 50px;
-        transition: transform 0.3s ease; /* Smooth hover effect for images */
+        transition: transform 0.3s ease; 
     }
 
-    /* Hover Effects */
     .social-icons a:hover {
-        transform: scale(1.1); /* Slightly enlarges the icon */
+        transform: scale(1.1); 
     }
 
     .social-icons img:hover {
-        transform: scale(1.2); /* Slightly enlarges the image */
+        transform: scale(1.2); 
     }
 
 /* -----------------Profile Picture Styles -------------------*/
 .profile-pic {
-    width: 200px; /* Adjust size as needed */
-    height: 200px; /* Ensure it's a square */
-    border-radius: 50%; /* Makes it circular */
-    object-fit: cover; /* Ensures the image fits within the circle */
-    margin: 20px auto; /* Centers the image */
-    display: block; /* Centers the image in the container */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    min-width: 200px;
+    min-height: 200px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin: 20px auto;
+    display: block; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
-/* Hover Effect */
 .profile-pic:hover {
-    transform: translateY(-10px) scale(1.05); /* Moves up and slightly enlarges */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    transform: translateY(-10px) scale(1.05); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Floating Animation */
 @keyframes float {
     0%, 100% {
         transform: translateY(0);
@@ -253,13 +246,12 @@ body
 }
 
 .profile-pic {
-    animation: float 3s ease-in-out infinite; /* Makes the image float up and down */
+    animation: float 3s ease-in-out infinite; 
 }
 
-/* Make it responsive */
 @media (max-width: 768px) {
     .profile-pic {
-        width: 100px; /* Smaller size for smaller screens */
+        width: 100px; 
         height: 100px;
     }
 }
@@ -297,25 +289,47 @@ body
 @media (max-width: 768px) {
     .nav-links {
         display: none;
-        position: absolute;
+        position: fixed; 
         top: 80px;
         left: 0;
         width: 100%;
+        height: calc(100vh - 80px);
         background-color: white;
         flex-direction: column;
         align-items: center;
-        padding: 20px 0;
+        padding: 30px 0;
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        gap: 15px;
+        gap: 20px;
+        overflow-y: auto;
+        z-index: 999; 
+        transition: all 0.3s ease-out; 
     }
     
     .nav-links.active {
         display: flex;
+        animation: fadeInDown 0.4s ease-out; 
     }
     
     .hamburger {
         display: flex;
+        z-index: 1000; 
     }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+}
     
     .hero {
         padding: 150px 0 80px;
@@ -338,15 +352,13 @@ body
         width: 100%;
         text-align: center;
     }
-}
-/* Hero Buttons Container */
+
 .hero-buttons {
     display: flex;
     gap: 15px;
     margin-top: 30px;
 }
 
-/* Primary Button Styles */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -372,19 +384,17 @@ body
     box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
 }
 
-/* Icon styling */
 .btn i {
     font-size: 1rem;
 }
 
-/* Hero Buttons Container */
+
 .hero-buttons {
     display: flex;
     gap: 15px;
     margin-top: 30px;
 }
 
-/* Primary Button Styles */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -410,12 +420,10 @@ body
     box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
 }
 
-/* Icon styling */
 .btn i {
     font-size: 1rem;
 }
 
-/* Hero Buttons Container */
 .hero-buttons {
     display: flex;
     gap: 15px;
@@ -448,7 +456,6 @@ body
     box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
 }
 
-/* Icon styling */
 .btn i {
     font-size: 1rem;
 }
@@ -568,7 +575,6 @@ body
     }
 }
 
-/* Rest of your existing CSS remains the same */
 .about-content {
     display: flex;
     flex-wrap: wrap;
@@ -582,9 +588,6 @@ body
     min-width: 300px;
     max-width: 600px;
 }
-
-/* ... (keep the rest of your existing about section CSS) ... */
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .profile-orbit {
@@ -1580,7 +1583,6 @@ body
     transform: translateX(5px);
 }
 
-/* Loading Spinner */
 .spinner {
     animation: spin 0.75s linear infinite;
 }
@@ -1590,7 +1592,6 @@ body
     to { transform: rotate(360deg); }
 }
 
-/* Success Message */
 .form-success {
     display: flex;
     align-items: center;
@@ -1612,7 +1613,6 @@ body
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-    /* Responsive adjustments */
     @media (max-width: 768px) {
         .contact-wrapper {
             grid-template-columns: 1fr;
